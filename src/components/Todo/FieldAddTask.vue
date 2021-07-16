@@ -26,7 +26,7 @@ export default {
       //   this.$store.commit('doneTask', task.id)
       // },
       addTask() {
-        this.$store.commit('addTask', this.newTaskTitle)
+        this.$store.dispatch('addTask', this.newTaskTitle)
         this.newTaskTitle = ''
       },
       
