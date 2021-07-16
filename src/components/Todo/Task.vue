@@ -23,23 +23,31 @@
             <v-list-item-action>
               <!-- @click.stop="deleteTask(task.id)" detiene la propagacion del evento
               que se ejecuta en el elemento padre"\ -->
-              <v-btn 
+
+              <!-- <v-btn 
                 @click.stop="dialogs.delete = true"
                 icon
               >
+
+                
+
                 <v-icon color="primary lighten-1">mdi-delete</v-icon>
-              </v-btn>
+              </v-btn> -->
+
+              <task-menu :task="task"/>
+
             </v-list-item-action>
           
           </template>
 
         </v-list-item>
         <v-divider></v-divider>
-    <dialog-delete 
+
+    <!-- <dialog-delete 
       v-if="dialogs.delete" 
       :task="task"
       @close="dialogs.delete = false"
-    />
+    /> -->
       </div>
 </template>
 
@@ -47,15 +55,9 @@
 export default {
     props: ['task'],
     components: {
-      'dialog-delete': require('@/components/Todo/Dialogs/DialogDelete.vue').default
+      // 'dialog-delete': require('@/components/Todo/Dialogs/DialogDelete.vue').default,
+      'task-menu': require('@/components/Todo/TaskMenu.vue').default
     },
-    data () {
-      return {
-        dialogs: {
-          delete: false
-        }
-      }
-    }
 }
 </script>
 
