@@ -37,6 +37,11 @@ export default new Vuex.Store({
     hideSnackbar(state){
       state.snackbar.show = false
     },
+    updateTaskTitle(state, payload) {
+      console.log(payload)
+      let task = state.tasks.filter( task => task.id === payload.id )[0]
+      task.title = payload.title
+    },
     deleteTask(state, id){
       state.tasks =  state.tasks.filter( task => task.id !== id )
     },
@@ -70,6 +75,10 @@ export default new Vuex.Store({
     }
   },
   actions: {
+    updateTaskTitle({commit}, payload){
+      commit('updateTaskTitle, payload')
+      commit('showSnackbar', {text: 'Task updated!'})
+    },
     addTask({ commit }, newTaskTitle) {
       commit('addTask', newTaskTitle)
       commit('showSnackbar', { text: 'Task Added'} )
