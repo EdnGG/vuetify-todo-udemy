@@ -5,27 +5,32 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    search: null,
 
     tasks: [ 
       {
         id: 1,
         title: 'Wake up',
-        done: false
+        done: false,
+        dueDate: '2021-07-18',
       },
       {
         id: 2,
         title: 'Get Bananas',
-        done: false
+        done: false,
+        dueDate: '2021-07-19',
       },
       {
         id: 3,
         title: 'Eat Banannas',
-        done: false
+        done: false,
+        dueDate: '2021-07-20',
       },
       {
         id: 4,
         title: 'Study',
-        done: false
+        done: false,
+        dueDate: null,
       }
     ],
     snackbar: {
@@ -34,8 +39,17 @@ export default new Vuex.Store({
     },
   },
   mutations: {
+    setSearch(state, payload) {
+      state.search = payload
+      console.log(payload)
+    },   
     hideSnackbar(state){
       state.snackbar.show = false
+    },
+    updateTaskDueDate(state, payload) {
+      console.log(payload)
+      let task = state.tasks.filter( task => task.id === payload.id )[0]
+      task.dueDate = payload.dueDate
     },
     updateTaskTitle(state, payload) {
       console.log(payload)
@@ -50,7 +64,8 @@ export default new Vuex.Store({
       let newTask = {
         id: Date.now(),
         title : newTaskTitle,
-        done: false
+        done: false,
+        dueDate:  null
       }
       state.tasks.push(newTask)
     },
@@ -75,6 +90,10 @@ export default new Vuex.Store({
     }
   },
   actions: {
+    updateTaskDueDate({commit}, payload){
+      commit('updateTaskDueDate',  payload)
+      commit('showSnackbar', {text: 'Due Date updated!'})
+    },
     updateTaskTitle({commit}, payload){
       commit('updateTaskTitle, payload')
       commit('showSnackbar', {text: 'Task updated!'})
@@ -89,6 +108,13 @@ export default new Vuex.Store({
     }
   },
   getters: {
-
+    tasksFiltered(state) {
+      if(!state.search){
+        return state.tasks
+      }
+      return state.tasks.filter( task => 
+        task.title.toLowerCase().includes(state.search.toLowerCase())
+      )
+    }
   }
 })

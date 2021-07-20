@@ -44,6 +44,7 @@
       dark
       prominent
       src="space.jpg"
+      height="170"
     >
       <template v-slot:img="{ props }">
         <v-img
@@ -52,23 +53,29 @@
         ></v-img>
       </template>
 
-      <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
+      <v-container class="pa-0">
 
-      <v-app-bar-title>Vuetify Todo</v-app-bar-title>
+        <v-row>
+          <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
+          <v-spacer></v-spacer>
+          <search />
+        </v-row>
+        <v-row>
+          <v-app-bar-title class="ml-4 text-h4">
+            Vuetify Todo
+          </v-app-bar-title>
+        </v-row>
+        <v-row>
+          <live-date-time />
+        </v-row>
 
-      <v-spacer></v-spacer>
+      </v-container>
 
-      <v-btn icon>
-        <v-icon>mdi-magnify</v-icon>
-      </v-btn>
 
-      <v-btn icon>
-        <v-icon>mdi-heart</v-icon>
-      </v-btn>
+      
 
-      <v-btn icon>
-        <v-icon>mdi-dots-vertical</v-icon>
-      </v-btn>
+
+      
     </v-app-bar>
 
     <v-main>
@@ -81,7 +88,9 @@
 <script>
   export default {
     components: {
-      'snackbar': require('@/components/Shared/Snackbar.vue').default
+      'snackbar': require('@/components/Shared/Snackbar.vue').default,
+      'search': require('@/components/Tools/Search.vue').default,
+      'live-date-time': require('@/components/Tools/LiveDateTime.vue').default
     },
     data: () => ({ 
       drawer: null,
