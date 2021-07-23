@@ -95,7 +95,11 @@ export default {
                     title: 'Sort', 
                     icon: 'mdi-drag-horizontal-variant',
                     click() {
+                      if(!this.$store.state.search){
                         this.$store.commit('toogleSorting')
+                      } else {
+                        this.$store.commit('showSnackbar', 'Sort is disabled while searching')
+                      }
                     } 
                 },
             ],

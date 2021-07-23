@@ -4,6 +4,7 @@
     @input="$store.commit('setSearch', $event)"
     @focus="searchClosed = false"
     @blur="searchClosed = true"
+    :disabled="$store.state.sorting"
     class="mt-1 expanding-search"
     :class="{ 'closed' : searchClosed && !$store.state.search }"
     placeholder="Search"
